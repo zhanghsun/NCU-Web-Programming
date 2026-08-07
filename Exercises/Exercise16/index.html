@@ -1,0 +1,51 @@
+# exercise16
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS Borders and Backgrounds</title>
+    <style>
+        .container {
+            padding: 20px;
+            font-family: serif;
+            font-weight: bold;
+            font-size: 24px;
+        }
+
+        .box {
+            margin-bottom: 20px;
+            padding: 10px;
+            width: fit-content;
+            min-width: 400px;
+        }
+
+        /* 第一個：淺藍背景 + 橘色雙線邊框 */
+        .box1 {
+            background-color: lightblue;
+            border: 5px double tomato; /* double 表示雙線 */
+        }
+
+        /* 第二個：黃色背景 + 藍色圓角實線邊框 */
+        .box2 {
+            background-color: yellow;
+            border: 2px solid dodgerblue;
+            border-radius: 15px; /* 圓角設定 */
+        }
+
+        /* 第三個：綠色背景 + 灰色虛線邊框 */
+        .box3 {
+            background-color: mediumseagreen;
+            border: 5px dotted gray; /* dotted 表示圓點虛線 */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="box box1">Hello World</div>
+        <div class="box box2">Hello World</div>
+        <div class="box box3">Hello World</div>
+    </div>
+
+</body>
+</html>

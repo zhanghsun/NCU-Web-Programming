@@ -1,0 +1,40 @@
+body {
+    font-family: "Times New Roman", serif;
+    background-color: #f2f2f2;
+    margin: 40px;
+}
+
+.container {
+    width: 900px;
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    overflow: hidden;
+}
+
+.float-box {
+    float: right;
+    width: 160px;
+    height: 180px;
+    border: 4px solid #76b82a;
+    padding: 10px;
+    margin-left: 20px;
+    overflow: auto;
+    font-size: 20px;
+    line-height: 1.4;
+    box-sizing: border-box;
+}
+
+p {
+    font-size: 22px;
+    line-height: 1.5;
+    margin: 0;
+}
+
+.highlight {
+    display: inline-block;
+    background-color: yellow;
+    border: 2px solid #3b4cff;
+    padding: 2px 8px;
+}

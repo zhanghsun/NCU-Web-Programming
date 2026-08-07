@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Interaction</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            margin-top: 100px;
+        }
+
+        .box {
+            width: 180px;
+            height: 140px;
+            border: 1px solid #ccc;
+            text-align: center;
+            padding-top: 30px;
+        }
+
+        .text {
+            font-size: 28px;
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        button {
+            padding: 6px 15px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <div id="text" class="text">Hello</div>
+    <button id="btn">Button</button>
+</div>
+
+<script>
+    const btn = document.getElementById("btn");
+    const text = document.getElementById("text");
+
+    // 滑鼠移上去（Hover）
+    btn.addEventListener("mouseover", () => {
+        text.style.color = "hotpink";
+        text.textContent = "Hello";
+    });
+
+    // 滑鼠離開
+    btn.addEventListener("mouseout", () => {
+        text.style.color = "black";
+        text.textContent = "Hello";
+    });
+
+    // 點擊（Click）
+    btn.addEventListener("click", () => {
+        text.style.color = "hotpink";
+        text.textContent = "Mouse Click";
+    });
+</script>
+
+</body>
+</html>

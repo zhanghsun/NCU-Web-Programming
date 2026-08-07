@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Form Validation</title>
+</head>
+<body>
+
+<h2>Please input a number between 150 and 300:</h2>
+
+<input type="text" id="numInput">
+<button onclick="checkValue()">Submit</button>
+
+<p id="result"></p>
+
+<script>
+function checkValue() {
+    let value = document.getElementById("numInput").value;
+    value = Number(value);
+
+    let message = "";
+
+    if (isNaN(value)) {
+        message = "Please enter a number";
+    } else if (value < 150) {
+        message = "Value too small";
+    } else if (value > 300) {
+        message = "Value too large";
+    } else {
+        message = "Input OK";
+    }
+
+    document.getElementById("result").innerText = message;
+}
+</script>
+
+</body>
+</html>

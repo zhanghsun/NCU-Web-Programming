@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<body>
+    <h2>Object Transformation</h2>
+    
+    <h3>Original Properties:</h3>
+    <p id="original"></p>
+
+    <h3>After Deleting 'age':</h3>
+    <pre id="result"></pre>
+
+    <script>
+        var Person = {
+            firstName : "Tony",
+            lastName : "Lee",
+            age : 50,
+            eyeColor : "Blue"
+        };
+
+        // List original properties
+        document.getElementById("original").innerHTML = Object.keys(Person).join(", ");
+
+        // Delete the age property
+        delete Person.age;
+
+        // Display the final object
+        document.getElementById("result").innerHTML = JSON.stringify(Person, null, 4);
+    </script>
+</body>
+</html>

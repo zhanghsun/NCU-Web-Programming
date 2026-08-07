@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: #f5f5f5;
+        }
+
+        /* Container for the specific view section */
+        .right-pane-container {
+            width: 496px; /* Spec: 496 */
+            border: 1px solid #ddd;
+            background-color: white;
+            padding: 20px;
+            box-sizing: border-box;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* -----------------------------------------------------------
+           1. Top Action Row (Contains the target button)
+        ----------------------------------------------------------- */
+        .action-row {
+            display: flex;
+            justify-content: flex-end; /* Aligns to right */
+            margin-bottom: 35px; /* Spec: 35 */
+        }
+
+        /* Target Button Styling from Spec #2 */
+        .toggle-btn {
+            /* Size: h22 / R8 */
+            height: 22px;
+            border-radius: 8px;
+            box-sizing: border-box; /* Crucial for height accuracy */
+            
+            /* Background and Outline */
+            background-color: #ffffff;
+            border: 1px solid #2f2f2f;
+            
+            /* Font Style: Roboto Regular 13px / Color: #2f2f2f */
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            color: #2f2f2f;
+            line-height: 1; /* Helps vertical centering */
+            
+            /* Padding from Spec 1 */
+            padding: 0 18px; 
+            
+            /* Interactions */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .toggle-btn:hover {
+            opacity: 0.8;
+            background-color: #f7f7f7;
+        }
+
+        /* -----------------------------------------------------------
+           2. Main Image Section
+        ----------------------------------------------------------- */
+        .main-image-placeholder {
+            width: 450px; /* Spec Image Width */
+            height: 240px; /* Spec Image Height */
+            margin: 0 auto 20px auto; /* Centers the image */
+            position: relative;
+            background-image: url('https://images.unsplash.com/photo-1511739001486-6bfe10ce785f?auto=format&fit=crop&w=1000&q=80'); /* Placeholder image of similar content */
+            background-size: cover;
+            background-position: center;
+            border: 1px solid #e0e0e0;
+        }
+
+        /* Blue default label on the image */
+        .img-label {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: blue;
+            font-family: 'Roboto', sans-serif;
+            font-weight: bold;
+            font-size: 14px;
+            text-align: center;
+        }
+
+        /* -----------------------------------------------------------
+           3. Revealable Info Panel (Initially hidden)
+        ----------------------------------------------------------- */
+        .info-panel {
+            max-height: 0; /* Key for the sliding transition */
+            overflow: hidden;
+            transition: max-height 0.4s ease-out;
+            border-top: 1px solid #eee; /* Light divider */
+            padding: 0 20px; /* Side padding is fine while hidden */
+        }
+
+        /* When the panel is active/visible */
+        .info-panel.active {
+            max-height: 500px; /* Larger than needed, triggers transition */
+            padding: 20px 20px 10px 20px; /* Activates vertical padding */
+            overflow-y: auto; /* Adds scrollbar if needed, like the lower-right mock */
+        }
+
+        /* Specific text styles based on the font style section in spec #1 */
+        .info-text-label {
+            font-family: 'Roboto', sans-serif;
+            font-size: 13px;
+            color: #707070; /* Color: #707070 */
+            margin-bottom: 8px;
+        }
+
+        /* The green bars representing file info lines */
+        .info-line {
+            display: flex;
+            align-items: center;
+            font-family: 'Roboto', sans-serif;
+            font-size: 12px;
+            margin-bottom: 6px; /* Margins from spec #3 */
+        }
+
+        /* Spec #3: height 10/6 and background #aaffaa */
+        .info-line span {
+            display: inline-block;
+            height: 12px; /* Set to visible text height */
+            background-color: #aaffaa; /* Color from lower-right mock */
+            padding: 2px 6px;
+            border-radius: 4px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="right-pane-container">
+
+        <div class="action-row">
+            <button class="toggle-btn" id="mainToggleButton" onclick="toggleDetails()">
+                查看資訊
+            </button>
+        </div>
+
+        <div class="main-image-placeholder">
+            <div class="img-label">Default<br>450x240</div>
+        </div>
+
+        <div class="info-panel" id="detailsPanel">
+            <p class="info-text-label">預覽內文字 / Preview Text</p>
+            
+            <div class="info-line"><span>修改日期 / Date: 2017/10/12</span></div>
+            <div class="info-line"><span>類別 / Type: JPG</span></div>
+            <div class="info-line"><span>大小 / Size: 456.97KB</span></div>
+            <div class="info-line"><span>路徑 / Path: \\sample\file\path\DesignCenter\...</span></div>
+        </div>
+
+    </div>
+
+    <script>
+        function toggleDetails() {
+            const button = document.getElementById('mainToggleButton');
+            const panel = document.getElementById('detailsPanel');
+            
+            // Toggle the visibility class
+            panel.classList.toggle('active');
+
+            // Change the button text based on the panel state
+            if (panel.classList.contains('active')) {
+                // Changing text dynamically to "Hide Info" or similar, 
+                // mapped to how the button will need to change function.
+                button.innerHTML = "收起資訊"; 
+                button.style.color = "#707070"; // Option to fade text when 'collapsed' text is shown
+            } else {
+                button.innerHTML = "查看資訊";
+                button.style.color = "#2f2f2f"; // Restoring original spec color
+            }
+        }
+    </script>
+
+</body>
+</html>
