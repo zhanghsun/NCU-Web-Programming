@@ -163,18 +163,40 @@
 
 /* --- Responsive: Tablet --- */
 @media (max-width: 768px) {
+    /* Keep the desktop single-row layout here.
+       Stacking the title block above the logo (flex-direction: column) grew
+       .header to ~100px tall while .nav stays pinned at top: 70px, so the nav
+       bar ended up hidden behind the header. Staying in a row keeps .header at
+       ~62px, which clears the 70px nav offset. */
     .header {
         padding: 12px 4%;
-        flex-direction: column;
-        gap: 8px;
+        gap: 12px;
+    }
+
+    /* Let the title block shrink inside the flex row, otherwise the nowrap
+       subtitle below would force the header wider than the viewport. */
+    .header > div {
+        min-width: 0;
     }
 
     .header-title {
         font-size: 18px;
+        line-height: 1.3;
     }
 
+    /* Explicit line-height plus a single line keeps the header height
+       deterministic across font fallbacks — Microsoft JhengHei is unavailable
+       on iOS/Android, and this subtitle is long enough to wrap otherwise. */
     .header-sub {
         font-size: 11px;
+        line-height: 1.3;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    .header-logo {
+        width: 84px;
     }
 
     .nav {
@@ -208,10 +230,16 @@
 
     .header-title {
         font-size: 16px;
+        line-height: 1.3;
     }
 
     .header-sub {
         font-size: 10px;
+        line-height: 1.3;
+    }
+
+    .header-logo {
+        width: 68px;
     }
 
     .nav {
