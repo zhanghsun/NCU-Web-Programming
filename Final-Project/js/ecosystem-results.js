@@ -313,17 +313,39 @@
 
     /* ──────────────────────────────────────────────────
        ANIMATE SCORE RING
-       CIRCUMFERENCE = 2π × r = 2π × 96 ≈ 603
-       (desktop; mobile overrides via CSS media queries
-        adjust the dasharray, but we keep the ratio)
+
+       The ring radius is owned by CSS and shrinks at the 768px and
+       480px breakpoints, so the circumference cannot be hard-coded:
+       getTotalLength() reports the real path length of the <circle>
+       for whichever radius is currently applied.
+
+       strokeDasharray and strokeDashoffset must both be derived from
+       that same number. Setting only the offset (against a dasharray
+       still coming from CSS) makes the dash pattern wrap on mobile,
+       which rendered the wrong arc — a score of 0 showed a partly
+       filled ring, and 20 showed an almost empty one.
     ────────────────────────────────────────────────── */
-    const CIRCUMFERENCE = 603;
+    const FALLBACK_CIRCUMFERENCE = 603;   /* desktop 2π × 96 */
+
+    function ringCircumference() {
+        if (typeof scoreRingEl.getTotalLength === 'function') {
+            const len = scoreRingEl.getTotalLength();
+            if (len > 0) return len;
+        }
+        return FALLBACK_CIRCUMFERENCE;
+    }
 
     function animateRing() {
-        const offset = CIRCUMFERENCE * (1 - score / 100);
+        const circumference = ringCircumference();
         requestAnimationFrame(() => {
+            /* Frame 1 — pin the dash pattern and the empty start state to
+               the same circumference the target offset is derived from. */
+            scoreRingEl.style.strokeDasharray  = circumference;
+            scoreRingEl.style.strokeDashoffset = circumference;
             requestAnimationFrame(() => {
-                scoreRingEl.style.strokeDashoffset = offset;
+                /* Frame 2 — let the CSS transition run to the score. */
+                scoreRingEl.style.strokeDashoffset =
+                    circumference * (1 - score / 100);
             });
         });
     }
