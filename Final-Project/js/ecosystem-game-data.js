@@ -12,7 +12,7 @@ window.GAME_SCENARIOS = [
   {
     chapter:  1,
     category: '湖岸整治',
-    bgImage:  'assets/images/background/wetland-reeds.jpg',
+    bgImage:  'assets/images/background/ncu-lake-sunset.jpg',
     title:    '湖岸悄悄消失的蘆葦叢',
     description:
       '中大校園湖泊的湖岸蘆葦叢近年逐漸萎縮，校方認為湖岸景觀過於雜亂，擬委託廠商進行「整頓」。' +
